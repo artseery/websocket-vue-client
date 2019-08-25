@@ -12,7 +12,7 @@
         methods: {
             logout: async function () {
                 try {
-                    await this.$axios.delete('http://localhost:3000/logout', {withCredentials: true})
+                    await this.$axios.delete('https://vue-test-websocket.herokuapp.com/logout', {withCredentials: true})
                     this.$router.push('/auth')
                 }
                 catch (e) {

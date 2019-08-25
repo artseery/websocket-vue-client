@@ -73,9 +73,9 @@
         },
         mounted: async function () {
             try {
-                const response = await this.$axios.get('http://localhost:3000/ticket', {withCredentials: true})
+                const response = await this.$axios.get('https://vue-test-websocket.herokuapp.com/ticket', {withCredentials: true})
                 let token = response.data.token
-                this.$connect(`ws://localhost:3000/?token=${token}`, {reconnection: true})
+                this.$connect(`ws://vue-test-websocket.herokuapp.com/?token=${token}`, {reconnection: true})
                 this.$options.sockets.onmessage = (data) => {
                     let self = this
                     this.socketData = JSON.parse(data.data)
@@ -99,7 +99,7 @@
             },
             saveRow: async function () {
                 try {
-                    await this.$axios.post('http://localhost:3000/new', this.new_row, {withCredentials: true})
+                    await this.$axios.post('https://vue-test-websocket.herokuapp.com/new', this.new_row, {withCredentials: true})
                     this.new_row.info = undefined
                     this.new_row.state = 'Connected'
                     this.adding_row = !this.adding_row
@@ -111,7 +111,7 @@
             },
             deleteRow: async function(id){
                 try {
-                    await this.$axios.delete(`http://localhost:3000/delete?id=${id}`, {withCredentials: true})
+                    await this.$axios.delete(`https://vue-test-websocket.herokuapp.com/delete?id=${id}`, {withCredentials: true})
                 }catch (e) {
                     alert('Невозможно удалить')
                 }

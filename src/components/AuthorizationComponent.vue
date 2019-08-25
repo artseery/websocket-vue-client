@@ -28,7 +28,7 @@
         methods: {
             login: async function () {
                 try {
-                    await this.$axios.post('http://localhost:3000/auth', this.login_data, {withCredentials: true})
+                    await this.$axios.post('https://vue-test-websocket.herokuapp.com/auth', this.login_data, {withCredentials: true})
                     this.$router.push('/')
                 } catch (e) {
                     console.log(e)

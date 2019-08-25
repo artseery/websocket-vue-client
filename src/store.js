@@ -25,7 +25,7 @@ const store = new Vuex.Store({
     actions: {
         async authorize({commit}) {
             try {
-                let response = await axios.get('http://localhost:3000/session', {withCredentials: true})
+                let response = await axios.get('https://vue-test-websocket.herokuapp.com/session', {withCredentials: true})
                 commit('authorize', response.data.role)
             }
             catch (e) {
