@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import { HTTP } from '/srv-defaults'
+    import { HTTP } from '../srv-defaults'
     export default {
         name: "NavMenu",
         methods: {

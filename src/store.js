@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from "axios"
 Vue.prototype.$axios = axios
 
-import { HTTP } from '/srv-defaults'
+import { HTTP } from './srv-defaults'
 
 Vue.use(Vuex)
 const store = new Vuex.Store({

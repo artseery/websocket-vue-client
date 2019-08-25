@@ -53,7 +53,7 @@
 
 <script>
     import NavMenu from "./NavMenu"
-    import { HTTP } from '/srv-defaults'
+    import { HTTP } from '../srv-defaults'
     export default {
         name: "TableComponent",
         components: {NavMenu},
