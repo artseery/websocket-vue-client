@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import TableComponent from "@/components/TableComponent"
 import AuthorizationComponent from "@/components/AuthorizationComponent"
 import axios from 'axios'
+import store from "./store"
 
 Vue.prototype.$axios = axios
 
@@ -21,13 +22,17 @@ const routes = [
         component: TableComponent,
         beforeEnter: async function (to, from, next) {
             try {
-                await axios.get('http://localhost:3000/session', {withCredentials: true})
-                next()
-            } catch (e) {
-                if (to.path!=='auth')
-                    next({name: 'auth'})
-                else
+                await store.dispatch('authorize')
+                if (store.state.authorized) {
                     next()
+                } else {
+                    if (to.path !== 'auth')
+                        next({name: 'auth'})
+                    else
+                        next()
+                }
+            } catch (e) {
+                console.log(e)
             }
         }
     },
@@ -37,10 +42,14 @@ const routes = [
         component: AuthorizationComponent,
         beforeEnter: async function (to, from, next) {
             try {
-                await axios.get('http://localhost:3000/session', {withCredentials: true})
-                next({name: 'table'})
+                await store.dispatch('authorize')
+                if (store.state.authorized)
+                    next({name: 'table'})
+                else {
+                    next()
+                }
             } catch (e) {
-                next()
+                console.log(e)
             }
 
         }
@@ -55,5 +64,6 @@ Vue.config.productionTip = false
 
 new Vue({
     render: h => h(App),
-    router
+    router,
+    store
 }).$mount('#app')
