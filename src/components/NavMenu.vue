@@ -7,12 +7,13 @@
 </template>
 
 <script>
+    import { HTTP } from '/srv-defaults'
     export default {
         name: "NavMenu",
         methods: {
             logout: async function () {
                 try {
-                    await this.$axios.delete('https://vue-test-websocket.herokuapp.com/logout', {withCredentials: true})
+                    await HTTP.delete('/logout')
                     this.$router.push('/auth')
                 }
                 catch (e) {

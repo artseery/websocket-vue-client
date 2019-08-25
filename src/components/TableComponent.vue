@@ -53,7 +53,7 @@
 
 <script>
     import NavMenu from "./NavMenu"
-
+    import { HTTP } from '/srv-defaults'
     export default {
         name: "TableComponent",
         components: {NavMenu},
@@ -73,7 +73,7 @@
         },
         mounted: async function () {
             try {
-                const response = await this.$axios.get('https://vue-test-websocket.herokuapp.com/ticket', {withCredentials: true})
+                const response = HTTP.get('/ticket')
                 let token = response.data.token
                 this.$connect(`ws://vue-test-websocket.herokuapp.com/?token=${token}`, {reconnection: true})
                 this.$options.sockets.onmessage = (data) => {
@@ -99,7 +99,7 @@
             },
             saveRow: async function () {
                 try {
-                    await this.$axios.post('https://vue-test-websocket.herokuapp.com/new', this.new_row, {withCredentials: true})
+                    await HTTP.post('/new', this.new_row)
                     this.new_row.info = undefined
                     this.new_row.state = 'Connected'
                     this.adding_row = !this.adding_row
@@ -111,7 +111,7 @@
             },
             deleteRow: async function(id){
                 try {
-                    await this.$axios.delete(`https://vue-test-websocket.herokuapp.com/delete?id=${id}`, {withCredentials: true})
+                    await HTTP.delete(`/delete?id=${id}`)
                 }catch (e) {
                     alert('Невозможно удалить')
                 }

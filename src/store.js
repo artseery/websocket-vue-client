@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import axios from "axios"
 Vue.prototype.$axios = axios
 
+import { HTTP } from '/srv-defaults'
+
 Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
@@ -25,7 +27,7 @@ const store = new Vuex.Store({
     actions: {
         async authorize({commit}) {
             try {
-                let response = await axios.get('https://vue-test-websocket.herokuapp.com/session', {withCredentials: true})
+                let response = await HTTP('/session')
                 commit('authorize', response.data.role)
             }
             catch (e) {

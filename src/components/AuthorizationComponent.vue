@@ -13,6 +13,8 @@
 </template>
 
 <script>
+    import { HTTP } from '/srv-defaults'
+
     export default {
         name: "AuthorizationComponent",
         data() {
@@ -28,7 +30,7 @@
         methods: {
             login: async function () {
                 try {
-                    await this.$axios.post('https://vue-test-websocket.herokuapp.com/auth', this.login_data, {withCredentials: true})
+                    await HTTP.post('/auth', this.login_data)
                     this.$router.push('/')
                 } catch (e) {
                     console.log(e)
