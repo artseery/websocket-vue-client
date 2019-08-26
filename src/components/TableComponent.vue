@@ -89,6 +89,7 @@
                     })
                 }
             } catch (e) {
+                console.log(e)
                 this.$store.dispatch('authorize')
             }
         },
