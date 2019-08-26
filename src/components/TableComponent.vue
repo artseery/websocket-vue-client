@@ -76,7 +76,9 @@
                 const response = HTTP.get('/ticket')
                 let token = response.data.token
                 this.$connect(`ws://vue-test-websocket.herokuapp.com/?token=${token}`, {reconnection: true})
+                console.log('connected to websocket')
                 this.$options.sockets.onmessage = (data) => {
+                    console.log('got message from ws:'+ data)
                     let self = this
                     this.socketData = JSON.parse(data.data)
                     this.socketData.forEach(function (obj, key) {
